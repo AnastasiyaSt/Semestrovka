@@ -1,0 +1,82 @@
+import java.util.ArrayList;
+
+public class SegmentList {
+    protected ArrayList<Segment> list;
+
+    public SegmentList() {
+        ArrayList<Segment> ar=new ArrayList<>();
+        list=ar;
+    }
+
+    public SegmentList(ArrayList<Segment> list) {
+        this.list = list;
+    }
+
+    //построение списка по множеству отрезков, заданных в текстовом файле
+    public SegmentList(String filename){
+
+    }
+
+
+    //вставка отрезка в список. При вставке учесть, существует ли подобный элемент в списке,
+    //    если да – то не добавлять;
+    public void insert(Segment seg){
+        int i=0;
+        boolean flag=true;
+        while ((flag)&&(i<list.size())){
+            if (list.get(i).equals(seg)){
+                flag=false;
+            }
+            i++;
+        }
+        if (flag){
+            list.add(seg);
+        }
+
+    }
+
+
+    //вывод всех отрезков и информации о них на экран;
+    public void show(){
+        list.forEach((n) ->
+            System.out.println("Segment :\n "+n));
+    }
+
+    //построить новый список, состоящий из отрезков,
+    // которые наклонены к оси абсцисс под углами 30 и 45 градусов
+   public SegmentList angleList(){
+        SegmentList ans= new SegmentList();
+        for (int i=0;i<list.size();i++){
+            if ((list.get(i).slant()==30)||(list.get(i).slant()==45)){
+                ans.insert(list.get(i));
+            }
+        }
+        return ans;
+
+   }
+     //построить новый список из отрезков,
+     //длина которых находится в интервале [a,b]
+   public SegmentList lengthList(int a, int b){
+       SegmentList ans= new SegmentList();
+       for (int i=0;i<list.size();i++){
+           if (((list.get(i).length())>=a)&&(list.get(i).length()<=b)){
+               ans.insert(list.get(i));
+           }
+       }
+       return ans;
+   }
+    // упорядочить список отрезков по возрастанию длин.
+    //    Любой сортировкой.
+    //    Встроенную Java-сортировку и Comparable/-ator не использовать.
+    public void sort(){
+        Segment s=new Segment();
+        for (int i = list.size() - 1; i >= 1; i--){
+            for (int j = 0; j < i; j++){
+                if(list.get(j).length() > list.get(j+1).length())
+                   s=list.get(j);
+                    list.set(j, list.get(j+1));
+                    list.set(j+1,s);
+            }
+        }
+    }
+}
