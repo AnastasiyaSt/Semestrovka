@@ -41,10 +41,15 @@ public class Segment {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Segment segment = (Segment) o;
-        return x1 == segment.x1 &&
+        return (x1 == segment.x1 &&
                 y1 == segment.y1 &&
                 x2 == segment.x2 &&
-                y2 == segment.y2;
+                y2 == segment.y2)
+                        ||
+                (x2 == segment.x1 &&
+                y2 == segment.y1 &&
+                x1 == segment.x2 &&
+                y1 == segment.y2);
     }
 
     @Override
