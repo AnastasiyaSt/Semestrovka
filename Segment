@@ -1,0 +1,54 @@
+import java.util.Objects;
+
+public class Segment {
+    protected int x1,y1,x2,y2;
+
+    public Segment() {
+        this.x1 = 0;
+        this.y1 = 0;
+        this.x2 = 0;
+        this.y2 = 0;
+    }
+    public Segment(int x1, int y1, int x2, int y2) {
+        this.x1 = x1;
+        this.y1 = y1;
+        this.x2 = x2;
+        this.y2 = y2;
+    }
+
+    public double length(){
+        double res;
+        res=(x1-x2)*(x1-x2)+(y1-y2)*(y1-y2);
+        res=Math.sqrt(res);
+        return res;
+    }
+
+    public double slant(){
+        double tan=(y2-y1)/(x2-x1);
+        return Math.toDegrees(Math.atan(tan));
+    }
+
+    @Override
+    public String toString() {
+        return "A(" + x1 + ", " + y1 +")\n"+
+                "B(" + x2 +", "+y2+")\n"+
+                "Length: " + length() +"\n"+
+                "Slant: "+slant();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Segment segment = (Segment) o;
+        return x1 == segment.x1 &&
+                y1 == segment.y1 &&
+                x2 == segment.x2 &&
+                y2 == segment.y2;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x1, y1, x2, y2);
+    }
+}
