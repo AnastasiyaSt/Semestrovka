@@ -21,21 +21,21 @@ public class Tester {
         startTime = System.currentTimeMillis();
         list2=list.angleList();
         timeSpent = System.currentTimeMillis() - startTime;
-        System.out.println("Anglelist: " +timeSpent*10+"  10millisec");
+        System.out.println("Anglelist: " +timeSpent+"  millisec");
         //list2.show();
 
         //Sorting
         startTime = System.currentTimeMillis();
         list.sort();
         timeSpent = System.currentTimeMillis() - startTime;
-        System.out.println("Sorted list: " +timeSpent*10+" 10millisec");
+        System.out.println("Sorted list: " +timeSpent+" millisec");
         //list.show();
 
         //length list
         startTime = System.currentTimeMillis();
         list.lengthList(2,77);
         timeSpent = System.currentTimeMillis() - startTime;
-        System.out.println("LengthList: " +10*timeSpent+" 10millisec");
+        System.out.println("LengthList: " +timeSpent+" millisec");
         //list2.show();
 
         //insert
@@ -43,7 +43,7 @@ public class Tester {
         startTime = System.currentTimeMillis();
         list.insert(newSeg);
         timeSpent = System.currentTimeMillis() - startTime;
-        System.out.println("Insert: " +10*timeSpent+" 10millisec");
+        System.out.println("Insert: " +timeSpent+" millisec");
         
     }
 }
