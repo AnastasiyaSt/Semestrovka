@@ -15,7 +15,7 @@ public class SegmentList {
       * @param filename file path
      * @throws IOException
      */
-    public SegmentList(String filename) throws IOException, EOFException {
+    public SegmentList(String filename) throws IOException {
         SegmentReader in = new SegmentReader(filename);
         ArrayList<Segment> ar = new ArrayList<>();
         this.list = ar;
