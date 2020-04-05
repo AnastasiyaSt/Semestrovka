@@ -1,0 +1,24 @@
+Анализ работы программы
+1. public SegmentList(String filename) throws IOException{...}
+	Сложность по времени O(n^2)
+	Сложность по памяти О(n)
+	
+2. public void insert(Segment seg){...}
+	Сложность по времени O(n)
+	Сложность по памяти О(1)
+	
+3. public void show(){...}
+	Сложность по времени O(n)
+	Сложность по памяти О(1)
+	
+4. public SegmentList angleList(){...}
+	Сложность по времени O(n)
+	Сложность по памяти О(n)
+	
+5. public SegmentList lengthList(int a, int b){...}
+	Сложность по времени O(n)
+	Сложность по памяти О(n)
+	
+6. public void sort(){...}
+	Сложность по времени O(n^2)
+	Сложность по памяти О(1)
