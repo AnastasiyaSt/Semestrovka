@@ -8,7 +8,7 @@ public class SegmentList {
         ArrayList<Segment> ar=new ArrayList<>();
         list=ar;
     }
-    
+
     /**
      * building a list based on the set of segments specified in the text file.
       * @param filename file path
@@ -103,19 +103,21 @@ public class SegmentList {
    }
 
 
-
     /**
      * Sorting a list in ascending order of segment lengths
      */
     public void sort(){
         Segment s=new Segment();
-        for (int i = list.size() - 1; i >= 1; i--){
+        for (int i = list.size()-1 ; i >= 1; i--){
             for (int j = 0; j < i; j++){
-                if(list.get(j).length() > list.get(j+1).length())
-                   s=list.get(j);
-                    list.set(j, list.get(j+1));
-                    list.set(j+1,s);
+                if(list.get(i).length() < list.get(j).length()) {
+                    s = list.get(i);
+                    list.set(i, list.get(j));
+                    list.set(j, s);
+                }
             }
         }
     }
+   
+
 }
