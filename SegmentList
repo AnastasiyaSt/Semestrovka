@@ -1,4 +1,3 @@
-import java.io.EOFException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -9,7 +8,7 @@ public class SegmentList {
         ArrayList<Segment> ar=new ArrayList<>();
         list=ar;
     }
-
+    
     /**
      * building a list based on the set of segments specified in the text file.
       * @param filename file path
@@ -21,38 +20,33 @@ public class SegmentList {
         this.list = ar;
         Segment seg=new Segment();
         while ((seg=in.readSegment())!=null) {
-            int i=0;
-            boolean flag=true;
-            while ((flag)&&(i<list.size())){
-                if (list.get(i).equals(seg)){
-                    flag=false;
-                }
-                i++;
-            }
-            if (flag){
+            if (uniqueSegment(seg)){
                 list.add(seg);
             }
         }
     }
 
+    /**
+     * checking the segment for uniqueness
+     * @param segment segment which is checked for uniqueness
+     * @return true if there is no such segment in the list
+     */
+    private boolean uniqueSegment(Segment segment){
+        for(Segment seg: list){
+            if (seg.equals(segment))
+                return false;
+        }
+        return true;
+    }
 
     /**Adding a segment to the list
      * Add if there is no such segment in the list
      * @param seg segment which is need to add
      */
     public void insert(Segment seg){
-        int i=0;
-        boolean flag=true;
-        while ((flag)&&(i<list.size())){
-            if (list.get(i).equals(seg)){
-                flag=false;
-            }
-            i++;
-        }
-        if (flag){
+        if (uniqueSegment(seg)){
             list.add(seg);
         }
-
     }
 
 
@@ -65,8 +59,8 @@ public class SegmentList {
     }
 
     /**
-     * Adding a segment to the list.Only for the program. Not available for users
-     * @param seg what should be inserted
+     * Adding a segment to the list.Only for the program.
+     * @param seg seg is inserted segment
      */
     private void add(Segment seg){
         list.add(seg);
@@ -89,10 +83,10 @@ public class SegmentList {
 
 
     /**
-     * Build a new list of segments whose length is not less than a and not more than b
+     * Build a new list of segments which length is not less than a and not more than b
      * @param a minimum length
      * @param b maximum length
-     * @return new list of segments whose length is not less than a and not more than b
+     * @return new list of segments which length is not less than a and not more than b
      * throw IllegalArgumentException if minimum length<0 or maximum length<minimum length
      */
 
