@@ -79,7 +79,8 @@ public class SegmentList {
        final double EPSILON=0.e-10;
        SegmentList ans= new SegmentList();
        for (Segment seg: list) {
-           if ((seg.slant()<=30+ EPSILON)&&(seg.slant()>=30-EPSILON)||(seg.slant()>=45- EPSILON)&&(seg.slant()<=45+ EPSILON)) {
+           if ((seg.angle()<= 30+EPSILON)&&(seg.angle()>= 30-EPSILON )||
+                   (seg.angle()>= 45-EPSILON) && (seg.angle())<=45+EPSILON) {
                ans.add(seg);
            }
        }
