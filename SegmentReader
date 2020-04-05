@@ -2,14 +2,20 @@ import java.io.*;
 
 public class SegmentReader {
 
-        public BufferedReader in;
-        public SegmentReader(String inp) throws IOException {
-            File file = new File(inp);
-            FileReader fr = new FileReader(file);
-            BufferedReader reader = new BufferedReader(fr);
-            in=reader;
-        }
+    public BufferedReader in;
+    public SegmentReader(String inp) throws IOException {
+        File file = new File(inp);
+        FileReader fr = new FileReader(file);
+        BufferedReader reader = new BufferedReader(fr);
+        in=reader;
+    }
 
+    /**
+     * reading two pairs of coordinates from the file line by line and returns a segment with these parameters. The string must look like: (a;b);(c;d)
+     * @return segment with these parameters
+     * @throws IOException
+     * @throws FileNotFoundException
+     */
         public Segment readSegment() throws IOException,FileNotFoundException {
             int x1,y1,x2,y2;
             String line = in.readLine();
@@ -35,7 +41,7 @@ public class SegmentReader {
             y2=Integer.parseInt(num);
             return new Segment(x1,y1,x2,y2);
         }
-        
+
 }
 
 
