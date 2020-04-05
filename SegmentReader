@@ -1,0 +1,41 @@
+import java.io.*;
+
+public class SegmentReader {
+
+        public BufferedReader in;
+        public SegmentReader(String inp) throws IOException {
+            File file = new File(inp);
+            FileReader fr = new FileReader(file);
+            BufferedReader reader = new BufferedReader(fr);
+            in=reader;
+        }
+
+        public Segment readSegment() throws IOException,FileNotFoundException {
+            int x1,y1,x2,y2;
+            String line = in.readLine();
+            if (line==null){return null;}
+            int ind1=line.indexOf('(');
+            int ind2=line.indexOf(';');
+            String num=line.substring(ind1+1,ind2);
+            x1=Integer.parseInt(num);
+
+            ind1=line.indexOf(';');
+            ind2=line.indexOf(')');
+            num=line.substring(ind1+1,ind2);
+            y1=Integer.parseInt(num);
+
+            ind1=line.lastIndexOf('(');
+            ind2=line.lastIndexOf(';');
+            num=line.substring(ind1+1,ind2);
+            x2=Integer.parseInt(num);
+
+            ind1=line.lastIndexOf(';');
+            ind2=line.lastIndexOf(')');
+            num=line.substring(ind1+1,ind2);
+            y2=Integer.parseInt(num);
+            return new Segment(x1,y1,x2,y2);
+        }
+        
+}
+
+
