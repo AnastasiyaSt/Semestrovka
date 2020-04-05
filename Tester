@@ -1,0 +1,10 @@
+import java.io.IOException;
+
+public class Tester {
+    public static void main(String[] args) throws IOException {
+        String path="C:/Users/stepa/Documents/Semestr2/SemestrovkaComp/data.txt";
+
+        SegmentList list=new SegmentList(path);
+        list.show();
+    }
+}
