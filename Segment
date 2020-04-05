@@ -20,8 +20,8 @@ public class Segment implements Serializable {
     /**
      * @return the length of the segment
      */
-    public float length(){
-        float res;
+    public double length(){
+        double res;
         res=(x1-x2)*(x1-x2)+(y1-y2)*(y1-y2);
         res= (float) Math.sqrt(res);
         return res;
