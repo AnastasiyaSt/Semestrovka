@@ -76,33 +76,38 @@ public class SegmentList {
      * @return  Segmentlist in which all segments are tilted to the abscissa by 30 or 45 degrees
      */
    public SegmentList angleList(){
-        SegmentList ans= new SegmentList();
-        for (int i=0;i<list.size();i++){
-            if ((list.get(i).slant()==30)||(list.get(i).slant()==45)){
-                ans.add(list.get(i));
-            }
-        }
-        return ans;
-
+       final double EPSILON=0.e-10;
+       SegmentList ans= new SegmentList();
+       for (Segment seg: list) {
+           if ((seg.slant()<=30+ EPSILON)&&(seg.slant()>=30-EPSILON)||(seg.slant()>=45- EPSILON)&&(seg.slant()<=45+ EPSILON)) {
+               ans.add(seg);
+           }
+       }
+       return ans;
    }
+
 
     /**
      * Build a new list of segments whose length is not less than a and not more than b
      * @param a minimum length
      * @param b maximum length
      * @return new list of segments whose length is not less than a and not more than b
+     * throw IllegalArgumentException if minimum length<0 or maximum length<minimum length
      */
+
    public SegmentList lengthList(int a, int b){
+       final double EPSILON=0.e-10;
+       if ((b<a)||(a<0))
+           throw new IllegalArgumentException();
        SegmentList ans= new SegmentList();
-       int i=0;
-       while ((i<list.size())&&(list.get(i)!=null)){
-           if (((list.get(i).length())>=a)&&(list.get(i).length()<=b)){
-               ans.add(list.get(i));
-           }
-           i++;
+       for(Segment seg: list){
+           if ((seg.length()>=a-EPSILON)||(seg.length()<=b+EPSILON))
+               ans.add(seg);
        }
        return ans;
    }
+
+
 
     /**
      * Sorting a list in ascending order of segment lengths
