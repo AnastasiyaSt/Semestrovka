@@ -1,3 +1,5 @@
+import java.io.EOFException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class SegmentList {
@@ -8,18 +10,36 @@ public class SegmentList {
         list=ar;
     }
 
-    public SegmentList(ArrayList<Segment> list) {
-        this.list = list;
+    /**
+     * building a list based on the set of segments specified in the text file.
+      * @param filename file path
+     * @throws IOException
+     */
+    public SegmentList(String filename) throws IOException, EOFException {
+        SegmentReader in = new SegmentReader(filename);
+        ArrayList<Segment> ar = new ArrayList<>();
+        this.list = ar;
+        Segment seg=new Segment();
+        while ((seg=in.readSegment())!=null) {
+            int i=0;
+            boolean flag=true;
+            while ((flag)&&(i<list.size())){
+                if (list.get(i).equals(seg)){
+                    flag=false;
+                }
+                i++;
+            }
+            if (flag){
+                list.add(seg);
+            }
+        }
     }
 
-    //построение списка по множеству отрезков, заданных в текстовом файле
-    public SegmentList(String filename){
 
-    }
-
-
-    //вставка отрезка в список. При вставке учесть, существует ли подобный элемент в списке,
-    //    если да – то не добавлять;
+    /**Adding a segment to the list
+     * Add if there is no such segment in the list
+     * @param seg segment which is need to add
+     */
     public void insert(Segment seg){
         int i=0;
         boolean flag=true;
@@ -36,38 +56,57 @@ public class SegmentList {
     }
 
 
-    //вывод всех отрезков и информации о них на экран;
+    /**
+     * Output of all segments and information about them
+     */
     public void show(){
         list.forEach((n) ->
             System.out.println("Segment :\n "+n));
     }
 
-    //построить новый список, состоящий из отрезков,
-    // которые наклонены к оси абсцисс под углами 30 и 45 градусов
+    /**
+     * Adding a segment to the list.Only for the program. Not available for users
+     * @param seg what should be inserted
+     */
+    private void add(Segment seg){
+        list.add(seg);
+    }
+    /**
+     * Building a new Segmentlist in which all segments are tilted to the abscissa by 30 or 45 degrees
+     * @return  Segmentlist in which all segments are tilted to the abscissa by 30 or 45 degrees
+     */
    public SegmentList angleList(){
         SegmentList ans= new SegmentList();
         for (int i=0;i<list.size();i++){
             if ((list.get(i).slant()==30)||(list.get(i).slant()==45)){
-                ans.insert(list.get(i));
+                ans.add(list.get(i));
             }
         }
         return ans;
 
    }
-     //построить новый список из отрезков,
-     //длина которых находится в интервале [a,b]
+
+    /**
+     * Build a new list of segments whose length is not less than a and not more than b
+     * @param a minimum length
+     * @param b maximum length
+     * @return new list of segments whose length is not less than a and not more than b
+     */
    public SegmentList lengthList(int a, int b){
        SegmentList ans= new SegmentList();
-       for (int i=0;i<list.size();i++){
+       int i=0;
+       while ((i<list.size())&&(list.get(i)!=null)){
            if (((list.get(i).length())>=a)&&(list.get(i).length()<=b)){
-               ans.insert(list.get(i));
+               ans.add(list.get(i));
            }
+           i++;
        }
        return ans;
    }
-    // упорядочить список отрезков по возрастанию длин.
-    //    Любой сортировкой.
-    //    Встроенную Java-сортировку и Comparable/-ator не использовать.
+
+    /**
+     * Sorting a list in ascending order of segment lengths
+     */
     public void sort(){
         Segment s=new Segment();
         for (int i = list.size() - 1; i >= 1; i--){
