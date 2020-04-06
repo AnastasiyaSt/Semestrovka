@@ -18,32 +18,32 @@ public class Tester {
 
         //Anglelist
         SegmentList list2=new SegmentList();
-        startTime = System.currentTimeMillis();
+        startTime = System.nanoTime();
         list2=list.angleList();
-        timeSpent = System.currentTimeMillis() - startTime;
-        System.out.println("Anglelist: " +timeSpent+"  millisec");
+        timeSpent = System.nanoTime() - startTime;
+        System.out.println("Anglelist: " +timeSpent+" nanosec");
         //list2.show();
 
         //Sorting
-        startTime = System.currentTimeMillis();
+        startTime = System.nanoTime();
         list.sort();
-        timeSpent = System.currentTimeMillis() - startTime;
-        System.out.println("Sorted list: " +timeSpent+" millisec");
+        timeSpent = System.nanoTime() - startTime;
+        System.out.println("Sorted list: " +timeSpent+" nanosec");
+        //System.out.println("Sorted");
         //list.show();
 
         //length list
-        startTime = System.currentTimeMillis();
+        startTime = System.nanoTime();
         list.lengthList(2,77);
-        timeSpent = System.currentTimeMillis() - startTime;
-        System.out.println("LengthList: " +timeSpent+" millisec");
+        timeSpent = System.nanoTime() - startTime;
+        System.out.println("LengthList: " +timeSpent+"nanosec");
         //list2.show();
 
         //insert
-        Segment newSeg=new Segment(2,6,34,8);
-        startTime = System.currentTimeMillis();
-        list.insert(newSeg);
-        timeSpent = System.currentTimeMillis() - startTime;
-        System.out.println("Insert: " +timeSpent+" millisec");
-        
+        startTime = System.nanoTime();
+        list.insert(new Segment(1, -5, -7, 1));
+        timeSpent = System.nanoTime() - startTime;
+        System.out.println("Insert: " +timeSpent+" nanosec");
+
     }
 }
